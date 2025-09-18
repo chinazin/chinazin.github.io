@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종합 종목 관리 대시보드 (관리자용)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f1f5f9; }
+        .editor-controls { background-color: white; padding: 1rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 1rem; z-index: 50; }
+        [contenteditable="true"] { outline: 2px dashed #3b82f6; background-color: #f0f9ff; }
+        .delete-stock-btn { display: none; }
+        .editing .delete-stock-btn { display: table-cell; }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-5xl mx-auto mb-6 editor-controls flex items-center justify-between">
+        <label class="font-bold text-lg"><input type="checkbox" id="editModeToggle" class="mr-2 h-4 w-4 align-middle">수정 모드</label>
+        <button id="saveButton" class="bg-green-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-green-700">회원용 리포트 저장 (index.html)</button>
+    </div>
+
+    <div id="report-content" class="max-w-5xl mx-auto space-y-8">
+        <!-- === 자동 날짜 헤더 추가 === -->
+        <header class="text-center">
+            <h1 class="text-4xl font-bold">종합 종목 리포트</h1>
+            <p id="current-date" class="text-gray-500 mt-2"></p>
+        </header>
+        <!-- ======================= -->
+
+        <!-- 매수 종목 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <header class="text-center p-5 bg-gray-800 text-white">
+                <h2 class="text-2xl font-bold editable" contenteditable="false">무료방 매수 종목</h2>
+            </header>
+            <div class="p-4 overflow-x-auto">
+                <table class="w-full text-center text-sm stock-table" data-section="buy">
+                    <thead><tr><th class="p-3">번호</th><th class="p-3">종목</th><th class="p-3">섹터</th><th class="p-3">내용</th><th class="p-3 delete-stock-btn">삭제</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200"></tbody>
+                </table>
+                <button class="add-stock-btn mt-4 bg-gray-200 hover:bg-gray-300 text-sm font-bold py-2 px-4 rounded-lg w-full">+ 종목 추가</button>
+            </div>
+        </div>
+        <!-- 수익매도 종목 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <header class="text-center p-5 bg-teal-600 text-white">
+                <h2 class="text-2xl font-bold editable" contenteditable="false">무료방 수익매도 종목</h2>
+            </header>
+            <div class="p-4 overflow-x-auto">
+                <table class="w-full text-center text-sm stock-table" data-section="profit">
+                     <thead><tr><th class="p-3">번호</th><th class="p-3">종목</th><th class="p-3">섹터</th><th class="p-3">내용</th><th class="p-3 delete-stock-btn">삭제</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200"></tbody>
+                </table>
+                <button class="add-stock-btn mt-4 bg-gray-200 hover:bg-gray-300 text-sm font-bold py-2 px-4 rounded-lg w-full">+ 종목 추가</button>
+            </div>
+        </div>
+        <!-- 절익관리 종목 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <header class="text-center p-5 bg-purple-700 text-white">
+                <h2 class="text-2xl font-bold editable" contenteditable="false">무료방 절익관리 종목</h2>
+            </header>
+            <div class="p-4 overflow-x-auto">
+                <table class="w-full text-center text-sm stock-table" data-section="risk">
+                     <thead><tr><th class="p-3">번호</th><th class="p-3">종목</th><th class="p-3">섹터</th><th class="p-3">내용</th><th class="p-3 delete-stock-btn">삭제</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200"></tbody>
+                </table>
+                <button class="add-stock-btn mt-4 bg-gray-200 hover:bg-gray-300 text-sm font-bold py-2 px-4 rounded-lg w-full">+ 종목 추가</button>
+            </div>
+        </div>
+        <!-- 완매도/손절 종목 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <header class="text-center p-5 bg-red-700 text-white">
+                <h2 class="text-2xl font-bold editable" contenteditable="false">완매도 또는 손절 완료 종목</h2>
+            </header>
+            <div class="p-4 overflow-x-auto">
+                <table class="w-full text-center text-sm stock-table" data-section="sell">
+                     <thead><tr><th class="p-3">번호</th><th class="p-3">종목</th><th class="p-3">섹터</th><th class="p-3">내용</th><th class="p-3 delete-stock-btn">삭제</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200"></tbody>
+                </table>
+                <button class="add-stock-btn mt-4 bg-gray-200 hover:bg-gray-300 text-sm font-bold py-2 px-4 rounded-lg w-full">+ 종목 추가</button>
+            </div>
+        </div>
+    </div>
+
+<script id="editor-script">
+(function() {
+    let stockData = { buy: [], profit: [], risk: [], sell: [] };
+
+    function initializeEditor() {
+        const editModeToggle = document.getElementById('editModeToggle');
+        const saveButton = document.getElementById('saveButton');
+        const reportContent = document.getElementById('report-content');
+        
+        // === 자동 날짜 기능 추가 ===
+        function setCurrentDate() {
+            const dateEl = document.getElementById('current-date');
+            if (dateEl) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = now.getMonth() + 1;
+                const day = now.getDate();
+                dateEl.textContent = `${year}년 ${month}월 ${day}일 기준`;
+            }
+        }
+        // =======================
+
+        function syncDataFromDOM() {
+            Object.keys(stockData).forEach(key => {
+                const tableEl = document.querySelector(`.stock-table[data-section="${key}"]`);
+                if (!tableEl) return;
+                const rows = tableEl.querySelectorAll('tbody tr.stock-row');
+                stockData[key] = Array.from(rows).map(row => ({
+                    no: row.cells[0].textContent,
+                    name: row.cells[1].textContent,
+                    sector: row.cells[2].textContent,
+                    desc: row.cells[3].textContent,
+                }));
+            });
+            document.querySelectorAll('#report-content header h2').forEach(header => {
+                header.dataset.title = header.textContent;
+            });
+        }
+
+        function renderStockList() {
+            const isEditing = editModeToggle.checked;
+            Object.keys(stockData).forEach(key => {
+                const tableEl = document.querySelector(`.stock-table[data-section="${key}"]`);
+                if (!tableEl) return;
+                const tbody = tableEl.querySelector('tbody');
+                tbody.innerHTML = '';
+                stockData[key].forEach((stock, index) => {
+                    stock.no = index + 1;
+                    const stockRow = document.createElement('tr');
+                    stockRow.className = 'stock-row border-b';
+                    stockRow.innerHTML = `
+                        <td class="p-3 editable">${stock.no}</td>
+                        <td class="p-3 font-bold editable">${stock.name}</td>
+                        <td class="p-3 editable">${stock.sector}</td>
+                        <td class="p-3 text-left editable">${stock.desc}</td>
+                        <td class="p-3 delete-stock-btn"><button class="text-red-500 font-black" data-section="${key}" data-index="${index}">X</button></td>
+                    `;
+                    tbody.appendChild(stockRow);
+                });
+            });
+            if(isEditing) {
+                document.querySelectorAll('.editable').forEach(el => el.setAttribute('contenteditable', true));
+            }
+        }
+        
+        function generateViewerHTML(data) {
+            const sections = {
+                buy: { title: document.querySelector('[data-section="buy"]').closest('.bg-white').querySelector('h2').dataset.title || '고급방 매수 종목', color: 'bg-gray-800' },
+                profit: { title: document.querySelector('[data-section="profit"]').closest('.bg-white').querySelector('h2').dataset.title || '고급방 수익매도 종목', color: 'bg-teal-600' },
+                risk: { title: document.querySelector('[data-section="risk"]').closest('.bg-white').querySelector('h2').dataset.title || '고급방 절익관리 종목', color: 'bg-purple-700' },
+                sell: { title: document.querySelector('[data-section="sell"]').closest('.bg-white').querySelector('h2').dataset.title || '완매도 또는 손절 완료 종목', color: 'bg-red-700' }
+            };
+            
+            // 현재 날짜를 정적 텍스트로 가져오기
+            const dateText = document.getElementById('current-date').textContent;
+
+            const bodyContent = `<header class="text-center"><h1 class="text-4xl font-bold">종합 종목 리포트</h1><p class="text-gray-500 mt-2">${dateText}</p></header>` + 
+            Object.keys(data).map(key => {
+                if (!sections[key] || !data[key]) return '';
+                const section = sections[key];
+                const rows = data[key].map(stock => `
+                    <tr class="border-b"><td class="p-3">${stock.no}</td><td class="p-3 font-bold">${stock.name}</td><td class="p-3">${stock.sector}</td><td class="p-3 text-left">${stock.desc}</td></tr>`).join('');
+                return `<div class="bg-white rounded-lg shadow-md overflow-hidden"><header class="text-center p-5 ${section.color} text-white"><h2 class="text-2xl font-bold">${section.title}</h2></header><div class="p-4 overflow-x-auto"><table class="w-full text-center text-sm"><thead><tr><th class="p-3">번호</th><th class="p-3">종목</th><th class="p-3">섹터</th><th class="p-3">내용</th></tr></thead><tbody class="divide-y divide-gray-200">${rows}</tbody></table></div></div>`;
+            }).join('');
+            
+            const viewerHead = `<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>종합 종목 리포트</title><script src="https://cdn.tailwindcss.com"><\/script><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"><style>body{font-family:'Noto Sans KR',sans-serif;background-color:#f1f5f9}</style></head>`;
+            const viewerBody = `<body class="p-6"><div class="max-w-5xl mx-auto space-y-8">${bodyContent}</div></body>`;
+            return `<!DOCTYPE html><html lang="ko">${viewerHead}${viewerBody}</html>`;
+        }
+
+        reportContent.addEventListener('click', e => {
+            if (e.target.matches('.add-stock-btn')) {
+                syncDataFromDOM();
+                const section = e.target.previousElementSibling.dataset.section;
+                stockData[section].push({ no: 0, name: '새 종목', sector: '', desc: ''});
+                renderStockList();
+            } else if (e.target.matches('.delete-stock-btn button')) {
+                syncDataFromDOM();
+                const { section, index } = e.target.dataset;
+                stockData[section].splice(index, 1);
+                renderStockList();
+            }
+        });
+
+        editModeToggle.addEventListener('change', () => {
+            reportContent.classList.toggle('editing', editModeToggle.checked);
+            document.querySelectorAll('.editable').forEach(el => el.setAttribute('contenteditable', editModeToggle.checked));
+        });
+
+        saveButton.addEventListener('click', () => {
+            syncDataFromDOM();
+            const viewerHTML = generateViewerHTML(stockData);
+            const blob = new Blob([viewerHTML], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        });
+
+        renderStockList();
+        setCurrentDate(); // 페이지 로드 시 날짜 설정
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeEditor);
+    } else {
+        initializeEditor();
+    }
+})();
+</script>
+
+</body>
+</html>
+
