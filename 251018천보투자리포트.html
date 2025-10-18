@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>천보(Chunbo) 기업 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa; /* Lighter gray background */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .process-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 1rem;
+        }
+        .swot-quadrant {
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">천보(Chunbo) 기업 분석 리포트</h1>
+            <p class="text-lg text-gray-600">차세대 전해질 시장의 게임 체인저</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="card text-center border-t-4 border-blue-500">
+                <h3 class="text-lg font-semibold text-blue-600 mb-2">시가총액 (2024년 기준)</h3>
+                <p class="kpi-value text-blue-500">약 1조원 내외</p>
+            </div>
+            <div class="card text-center border-t-4 border-teal-500">
+                <h3 class="text-lg font-semibold text-teal-600 mb-2">핵심 제품</h3>
+                <p class="kpi-value text-teal-500">전해질 첨가제</p>
+                <p class="text-gray-500">LiFSI(P염), LiPO2F2(F염) 등</p>
+            </div>
+            <div class="card text-center border-t-4 border-purple-500">
+                <h3 class="text-lg font-semibold text-purple-600 mb-2">시장 전망</h3>
+                <p class="kpi-value text-purple-500">장기적 성장</p>
+                <p class="text-gray-500">전기차 시장 회복 시 높은 성장세 기대</p>
+            </div>
+        </section>
+        
+        <section class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
+            <div class="lg:col-span-2 card">
+                <h2 class="text-2xl font-bold mb-4 text-center">사업 포트폴리오</h2>
+                <p class="text-center text-gray-600 mb-6">2차 전지 소재 사업이 전체 매출의 70% 이상을 차지하며, 회사의 성장을 견인하고 있습니다. 전자소재 및 의약품 사업도 안정적으로 운영 중입니다.</p>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="revenuePieChart"></canvas>
+                </div>
+            </div>
+            <div class="lg:col-span-3 card">
+                <h2 class="text-2xl font-bold mb-6 text-center">핵심 기술: 차세대 전해질 첨가제</h2>
+                <p class="text-center text-gray-600 mb-6">천보의 특수 전해질 첨가제는 배터리의 핵심 성능(수명, 출력, 안정성)을 획기적으로 개선합니다.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center">
+                    <div class="process-step">
+                        <div class="text-4xl mb-2">🔋</div>
+                        <p class="font-bold">기본 전해액</p>
+                        <p class="text-sm text-gray-500">Standard Electrolyte</p>
+                    </div>
+                    <div class="process-arrow text-blue-500 font-bold text-3xl my-4 md:my-0">+</div>
+                    <div class="process-step bg-blue-50 rounded-lg">
+                         <div class="text-4xl mb-2">✨</div>
+                        <p class="font-bold">천보 첨가제</p>
+                        <p class="text-sm text-blue-600">LiFSI, LiPO2F2 등</p>
+                    </div>
+                     <div class="process-arrow text-blue-500 font-bold text-3xl my-4 md:my-0">=</div>
+                     <div class="process-step">
+                         <div class="text-4xl mb-2">🚀</div>
+                        <p class="font-bold">고성능 배터리</p>
+                        <p class="text-sm text-gray-500">수명↑ 출력↑ 안정성↑</p>
+                    </div>
+                </div>
+                <ul class="mt-6 text-sm space-y-2 text-gray-700">
+                    <li><strong class="text-teal-600">LiFSI (P염):</strong> 실리콘 음극재 적용 시 발생하는 부피 팽창 문제를 완화하여 배터리 수명을 늘리는 핵심 소재입니다.</li>
+                    <li><strong class="text-purple-600">LiPO2F2 (F염):</strong> 고전압 양극재의 안정성을 높여 배터리 출력을 향상시키고, 가스 발생을 억제합니다.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">연간 재무 실적 추이</h2>
+            <p class="text-center text-gray-600 mb-6">글로벌 전기차(EV) 시장의 일시적 성장 둔화(캐즘) 및 고객사 재고 조정의 영향으로 2023년부터 실적이 크게 악화되었습니다. 시장 회복 시 가파른 실적 개선이 기대됩니다.</p>
+            <div class="chart-container" style="height: 400px; max-height: 500px;">
+                <canvas id="financialsChart"></canvas>
+            </div>
+        </section>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">투자 매력도 분석</h2>
+                 <p class="text-center text-gray-600 mb-6">기술 기반의 높은 성장 잠재력에도 불구하고, 최근 수익성이 크게 하락한 상태입니다. 업황 회복에 따른 턴어라운드 가능성에 주목할 필요가 있습니다.</p>
+                 <div class="chart-container" style="height: 350px;">
+                    <canvas id="financialsRadarChart"></canvas>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">SWOT 분석</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="swot-quadrant bg-green-50 border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 text-lg">강점 (Strengths)</h3>
+                        <ul class="list-disc list-inside text-green-700 mt-2 text-sm">
+                            <li>차세대 전해질 분야 세계 최고 수준의 기술력</li>
+                            <li>P염, F염 등 다각화된 제품 포트폴리오</li>
+                            <li>수직 계열화를 통한 원가 경쟁력</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-red-50 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-800 text-lg">약점 (Weaknesses)</h3>
+                        <ul class="list-disc list-inside text-red-700 mt-2 text-sm">
+                            <li>전기차 전방 시장 업황에 높은 민감도</li>
+                            <li>최근 수익성 악화 및 재고 부담</li>
+                            <li>높은 중국 매출 비중</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-blue-50 border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 text-lg">기회 (Opportunities)</h3>
+                        <ul class="list-disc list-inside text-blue-700 mt-2 text-sm">
+                            <li>장기적인 전기차 시장의 구조적 성장</li>
+                            <li>실리콘 음극재 등 차세대 기술 도입 확대</li>
+                            <li>미국 IRA/유럽 CRMA에 따른 탈중국 수혜</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-yellow-50 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-800 text-lg">위협 (Threats)</h3>
+                        <ul class="list-disc list-inside text-yellow-700 mt-2 text-sm">
+                            <li>중국 경쟁사들의 저가 공세 및 기술 추격</li>
+                            <li>리튬 등 핵심 원자재 가격 변동성</li>
+                            <li>전기차 시장 성장 둔화 장기화 가능성</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">성장 엔진: 글로벌 차세대 전해질 시장</h2>
+             <p class="text-center text-gray-600 mb-6">전기차 성능 향상을 위한 특수 첨가제 수요는 폭발적으로 증가할 것입니다. 천보는 이 시장 성장의 최대 수혜주 중 하나로 평가받습니다.</p>
+            <div class="chart-container" style="height: 400px; max-height: 500px;">
+                <canvas id="marketGrowthChart"></canvas>
+            </div>
+        </section>
+
+         <section class="card">
+             <h2 class="text-2xl font-bold text-center mb-6">미래 성장 로드맵</h2>
+            <div class="relative border-l-2 border-teal-500 ml-4 md:ml-0">
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-teal-600">2024년 하반기 ~ 2025년 상반기</p>
+                    <p class="text-gray-700">전방 시장 재고 소진 및 점진적 수요 회복기. 실적 턴어라운드 기반 마련.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-blue-600">2025년 하반기</p>
+                    <p class="text-gray-700">새만금 신규 공장 가동 시작. 북미 및 유럽 고객사향 공급 물량 확대 본격화.</p>
+                </div>
+                <div class="ml-8">
+                    <div class="absolute w-4 h-4 bg-purple-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-purple-600">2026년 ~</p>
+                    <p class="text-gray-700">차세대 배터리(전고체 등) 상용화에 따른 신규 소재 개발 및 공급. 글로벌 Top-tier 전해질 소재 기업으로 도약.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <footer class="text-center mt-12 text-sm text-gray-500">
+            <p>본 자료는 투자 참고용으로, 투자 판단에 대한 최종 책임은 투자자 본인에게 있습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const processLabels = (labels) => {
+            const MAX_LENGTH = 16;
+            return labels.map(label => {
+                if (label.length <= MAX_LENGTH) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const newLabels = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > MAX_LENGTH) {
+                        newLabels.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                newLabels.push(currentLine);
+                return newLabels;
+            });
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+        
+        const palette = {
+            blue: '#3b82f6',
+            teal: '#14b8a6',
+            purple: '#8b5cf6',
+            red: '#ef4444',
+            gray: '#6b7280',
+            lightBlue: 'rgba(59, 130, 246, 0.2)'
+        };
+
+        const revenuePieCtx = document.getElementById('revenuePieChart').getContext('2d');
+        new Chart(revenuePieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['2차 전지 소재', '전자소재', '의약품 및 기타'],
+                datasets: [{
+                    label: '사업부별 매출 비중',
+                    data: [75, 20, 5], 
+                    backgroundColor: [palette.blue, palette.teal, palette.purple],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                }
+            }
+        });
+
+        const financialsCtx = document.getElementById('financialsChart').getContext('2d');
+        new Chart(financialsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2021', '2022', '2023', '2024(E)'],
+                datasets: [
+                    {
+                        label: '매출액 (억원)',
+                        data: [5239, 6344, 2660, 3100],
+                        backgroundColor: palette.teal,
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: '영업이익 (억원)',
+                        data: [997, 1024, -450, -150],
+                        backgroundColor: palette.red,
+                        type: 'line',
+                        yAxisID: 'y1',
+                        borderColor: palette.red,
+                        borderWidth: 2,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { mode: 'index', intersect: false, ...commonTooltipOptions.plugins.tooltip },
+                    legend: { position: 'top' }
+                },
+                scales: {
+                   x: { grid: { display: false } },
+                   y: {
+                        position: 'left',
+                        beginAtZero: true,
+                        title: { display: true, text: '매출액 (억원)'}
+                    },
+                    y1: {
+                        position: 'right',
+                        title: { display: true, text: '영업이익 (억원)'},
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+        
+        const radarCtx = document.getElementById('financialsRadarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: processLabels(['안정성 (부채비율)', '성장성 (업황)', '수익성 (OPM)', '기술력 (해자)']),
+                datasets: [{
+                    label: '천보',
+                    data: [75, 25, 10, 90], 
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderColor: palette.purple,
+                    borderWidth: 2,
+                    pointBackgroundColor: palette.purple
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        pointLabels: { font: { size: 10 } },
+                         ticks: {
+                            callback: value => value + '%',
+                             backdropColor: 'rgba(0,0,0,0)'
+                        }
+                    }
+                }
+            }
+        });
+
+        const marketGrowthCtx = document.getElementById('marketGrowthChart').getContext('2d');
+        new Chart(marketGrowthCtx, {
+            type: 'line',
+            data: {
+                labels: ['2023', '2025', '2027', '2030'],
+                datasets: [{
+                    label: '글로벌 차세대 전해질 첨가제 시장 (조원)',
+                    data: [0.8, 2.5, 6, 15],
+                    fill: true,
+                    backgroundColor: palette.lightBlue,
+                    borderColor: palette.blue,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                         title: { display: true, text: '시장 규모 (조원)'}
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
+
