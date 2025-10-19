@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엔켐(Enchem) 기업 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            min-height: 120px;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: #3b82f6;
+        }
+        .swot-quadrant {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">엔켐(Enchem) 기업 분석 리포트</h1>
+            <p class="text-lg text-gray-600">미국 IRA 최대 수혜, 글로벌 전해액 시장의 게임 체인저</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="card text-center border-t-4 border-blue-500">
+                <h3 class="text-lg font-semibold text-blue-600 mb-2">시가총액 (2024년 기준)</h3>
+                <p class="kpi-value text-blue-500">약 7~8조원</p>
+            </div>
+            <div class="card text-center border-t-4 border-teal-500">
+                <h3 class="text-lg font-semibold text-teal-600 mb-2">핵심 사업</h3>
+                <p class="kpi-value text-teal-500">2차전지 전해액</p>
+                <p class="text-gray-500">배터리 4대 핵심소재 중 하나</p>
+            </div>
+            <div class="card text-center border-t-4 border-orange-500">
+                <h3 class="text-lg font-semibold text-orange-600 mb-2">핵심 경쟁력</h3>
+                <p class="kpi-value text-orange-500">탈중국 공급망</p>
+                <p class="text-gray-500">북미 유일 대규모 전해액 생산기지 보유</p>
+            </div>
+        </section>
+
+        <section class="card">
+             <h2 class="text-2xl font-bold mb-6 text-center">엔켐의 역할: 배터리 혈액 '전해액' 공급</h2>
+             <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">전해액은 배터리 내부에서 리튬이온이 양극과 음극을 오가는 통로 역할을 하는 '혈액'과 같은 필수 소재입니다. 엔켐은 리튬염, 용매, 첨가제를 혼합하여 고객사 맞춤형 고성능 전해액을 생산, 공급합니다.</p>
+             <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-4 text-center">
+                <div class="flow-step bg-gray-50">
+                     <div class="text-4xl mb-2">🧪</div>
+                     <h4 class="font-bold">원재료</h4>
+                     <p class="text-sm text-gray-500">리튬염, 용매, 첨가제</p>
+                </div>
+                <div class="flex justify-center"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step bg-blue-50">
+                     <div class="text-4xl mb-2">🏢</div>
+                     <h4 class="font-bold">엔켐</h4>
+                     <p class="text-sm text-blue-600">전해액 제조/공급</p>
+                </div>
+                <div class="flex justify-center"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step bg-gray-50">
+                     <div class="text-4xl mb-2">🚗</div>
+                     <h4 class="font-bold">글로벌 배터리/EV사</h4>
+                     <p class="text-sm text-gray-500">SK On, LG엔솔, Ultium Cells 등</p>
+                </div>
+             </div>
+        </section>
+
+        <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">연간 재무 실적 및 전망</h2>
+            <p class="text-center text-gray-600 mb-6">2023년은 원자재 가격 하락과 대규모 증설 투자로 인해 수익성이 악화되었으나, 2024년 하반기부터 미국 조지아 공장 가동이 본격화되면서 폭발적인 매출 성장이 기대됩니다.</p>
+            <div class="chart-container" style="height: 400px; max-height: 500px;">
+                <canvas id="financialsBarLineChart"></canvas>
+            </div>
+        </section>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">투자 매력도 분석</h2>
+                 <p class="text-center text-gray-600 mb-6">IRA 정책 수혜에 기반한 독보적인 성장성이 가장 큰 투자 포인트입니다. 단기적인 수익성보다는 미래 시장 지배력 확보에 초점을 맞추고 있습니다.</p>
+                 <div class="chart-container" style="height: 350px;">
+                    <canvas id="investmentRadarChart"></canvas>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">SWOT 분석</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="swot-quadrant bg-green-50 border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 text-lg">강점 (Strengths)</h3>
+                        <ul class="list-disc list-inside text-green-700 mt-2 text-sm">
+                            <li>북미 내 독보적인 전해액 생산 CAPA</li>
+                            <li>LG엔솔, SK온 등 안정적 고객사 확보</li>
+                            <li>선제적 글로벌 생산 거점 구축</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-red-50 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-800 text-lg">약점 (Weaknesses)</h3>
+                        <ul class="list-disc list-inside text-red-700 mt-2 text-sm">
+                            <li>경쟁사 대비 낮은 수익성</li>
+                            <li>대규모 증설에 따른 재무적 부담</li>
+                            <li>높은 리튬염 등 원재료 해외 의존도</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-blue-50 border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 text-lg">기회 (Opportunities)</h3>
+                        <ul class="list-disc list-inside text-blue-700 mt-2 text-sm">
+                            <li>미국 IRA/FEOC 규정에 따른 반사 수혜</li>
+                            <li>글로벌 전기차 시장의 구조적 성장</li>
+                            <li>자체 리튬염(LiFSI) 내재화 추진</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-yellow-50 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-800 text-lg">위협 (Threats)</h3>
+                        <ul class="list-disc list-inside text-yellow-700 mt-2 text-sm">
+                            <li>전기차 캐즘(Chasm) 현상 장기화 가능성</li>
+                            <li>미국 대선 등 정책적 불확실성</li>
+                            <li>전고체 등 차세대 배터리 기술의 등장</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">성장 엔진: 글로벌 생산능력(CAPA) 확대</h2>
+             <p class="text-center text-gray-600 mb-6">엔켐은 2026년까지 전 세계적으로 100만 톤 이상의 생산 능력을 확보하여, 명실상부한 글로벌 Top-Tier 전해액 기업으로 도약한다는 목표를 가지고 있습니다.</p>
+            <div class="chart-container" style="height: 400px; max-height: 500px;">
+                <canvas id="capaGrowthBarChart"></canvas>
+            </div>
+        </section>
+
+         <section class="card">
+             <h2 class="text-2xl font-bold text-center mb-6">글로벌 확장 로드맵</h2>
+            <div class="relative border-l-2 border-teal-500 ml-4 md:ml-0">
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-teal-600">2024년 하반기</p>
+                    <p class="text-gray-700">미국 조지아 2공장 가동 본격화. Ultium Cells(GM-LG 합작) 등 신규 고객사 공급 시작.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-blue-600">2025년</p>
+                    <p class="text-gray-700">미국 테네시, 텍사스 및 캐나다 공장 순차적 가동. 북미 시장 지배력 강화. 유럽 헝가리 2공장 증설.</p>
+                </div>
+                <div class="ml-8">
+                    <div class="absolute w-4 h-4 bg-orange-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-orange-600">2026년 이후</p>
+                    <p class="text-gray-700">글로벌 생산능력 100만톤 돌파. 리튬염 내재화 및 신규 사업(NMP 리사이클 등)을 통한 수직계열화 강화.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 text-sm text-gray-500">
+            <p>본 자료는 투자 참고용으로, 투자 판단에 대한 최종 책임은 투자자 본인에게 있습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const processLabels = (labels) => {
+            const MAX_LENGTH = 16;
+            return labels.map(label => {
+                if (label.length <= MAX_LENGTH) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const newLabels = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > MAX_LENGTH) {
+                        newLabels.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                newLabels.push(currentLine);
+                return newLabels;
+            });
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+        
+        const palette = {
+            blue: '#3b82f6',
+            teal: '#14b8a6',
+            orange: '#f97316',
+            red: '#ef4444',
+        };
+
+        const financialsBarLineCtx = document.getElementById('financialsBarLineChart').getContext('2d');
+        new Chart(financialsBarLineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024(E)', '2025(E)'],
+                datasets: [
+                    {
+                        label: '매출액 (억원)',
+                        data: [5036, 4012, 7500, 18000],
+                        backgroundColor: palette.blue,
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: '영업이익 (억원)',
+                        data: [156, -567, 300, 1500],
+                        backgroundColor: palette.red,
+                        type: 'line',
+                        yAxisID: 'y1',
+                        borderColor: palette.red,
+                        borderWidth: 2,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { mode: 'index', intersect: false, ...commonTooltipOptions.plugins.tooltip },
+                    legend: { position: 'top' }
+                },
+                scales: {
+                   x: { grid: { display: false } },
+                   y: {
+                        position: 'left',
+                        beginAtZero: true,
+                        title: { display: true, text: '매출액 (억원)'}
+                    },
+                    y1: {
+                        position: 'right',
+                        title: { display: true, text: '영업이익 (억원)'},
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+        
+        const investmentRadarCtx = document.getElementById('investmentRadarChart').getContext('2d');
+        new Chart(investmentRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: processLabels(['성장성 (IRA수혜)', '시장 지위 (북미)', '수익성', '기술력']),
+                datasets: [{
+                    label: '엔켐',
+                    data: [95, 90, 40, 75], 
+                    backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                    borderColor: palette.orange,
+                    borderWidth: 2,
+                    pointBackgroundColor: palette.orange
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        pointLabels: { font: { size: 10 } },
+                         ticks: {
+                            callback: value => value,
+                             backdropColor: 'rgba(0,0,0,0)'
+                        }
+                    }
+                }
+            }
+        });
+
+        const capaGrowthBarCtx = document.getElementById('capaGrowthBarChart').getContext('2d');
+        new Chart(capaGrowthBarCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025', '2026(Target)'],
+                datasets: [{
+                    label: '글로벌 생산능력 (만 톤)',
+                    data: [21.5, 49.5, 74.5, 109.5],
+                    backgroundColor: [
+                        palette.teal,
+                        palette.blue,
+                        palette.orange,
+                        '#6d28d9'
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    legend: { position: 'top' },
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                         title: { display: true, text: '생산능력 (만 톤/년)'}
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
