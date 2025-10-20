@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피엔티(PNT) 기업 분석 리포트 (ESS/LFP 신성장동력)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f9fafb; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .flow-step {
+            text-align: center;
+            padding: 1rem;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: #1d4ed8;
+        }
+        .swot-quadrant {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">피엔티(PNT) 기업 분석 리포트</h1>
+            <p class="text-lg text-gray-600">ESS/LFP 시장 진출로 신성장동력 확보 (2025.10 Update)</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="card text-center border-t-4 border-blue-800">
+                <h3 class="text-lg font-semibold text-blue-700 mb-2">수주잔고 (2025년 3분기)</h3>
+                <p class="kpi-value text-blue-800">4조원 돌파</p>
+                <p class="text-gray-500">북미 중심의 견조한 성장세</p>
+            </div>
+            <div class="card text-center border-t-4 border-green-500">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">시장 지위</h3>
+                <p class="kpi-value text-green-500">글로벌 1위</p>
+                <p class="text-gray-500">2차전지 코터(Coater) 장비</p>
+            </div>
+            <div class="card text-center border-t-4 border-orange-500">
+                <h3 class="text-lg font-semibold text-orange-600 mb-2">신규 성장 동력</h3>
+                <p class="kpi-value text-orange-500">LFP / ESS</p>
+                <p class="text-gray-500">양산용 장비 개발 완료 및 공급 추진</p>
+            </div>
+        </section>
+
+        <section class="card">
+             <h2 class="text-2xl font-bold mb-6 text-center">피엔티의 핵심 기술: 롤투롤(Roll-to-Roll) 공정</h2>
+             <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">롤투롤은 얇은 필름(Foil)을 풀고(Unwind) 그 위에 소재를 코팅하거나 가공한 뒤, 다시 감는(Rewind) 연속 공정 기술입니다. 피엔티는 2차전지 전극 공정의 핵심인 코팅, 압착, 절단 장비에서 세계 최고 수준의 기술력을 보유하고 있습니다.</p>
+             <div class="grid grid-cols-1 md:grid-cols-7 items-center gap-2 text-center">
+                <div class="flow-step col-span-2 md:col-span-1">
+                     <div class="text-4xl mb-2">📜</div>
+                     <h4 class="font-bold">원재료 공급</h4>
+                     <p class="text-sm text-gray-500">(구리/알루미늄 Foil)</p>
+                </div>
+                <div class="flex justify-center md:col-span-1"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step col-span-2 md:col-span-1 bg-blue-50 rounded-lg">
+                     <div class="text-4xl mb-2">🖌️</div>
+                     <h4 class="font-bold text-blue-700">코팅</h4>
+                     <p class="text-sm text-gray-500">활물질 도포</p>
+                </div>
+                 <div class="flex justify-center md:col-span-1"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step col-span-2 md:col-span-1 bg-blue-50 rounded-lg">
+                     <div class="text-4xl mb-2">🗜️</div>
+                     <h4 class="font-bold text-blue-700">압착 & 절단</h4>
+                     <p class="text-sm text-gray-500">(Press & Slitter)</p>
+                </div>
+                 <div class="flex justify-center md:col-span-1"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step col-span-2 md:col-span-1">
+                     <div class="text-4xl mb-2">🔋</div>
+                     <h4 class="font-bold">최종 전극</h4>
+                     <p class="text-sm text-gray-500">(Anode/Cathode)</p>
+                </div>
+             </div>
+        </section>
+
+        <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">연간 재무 실적 및 전망</h2>
+            <p class="text-center text-gray-600 mb-6">글로벌 배터리 셀 메이커들의 북미 공장 증설이 본격화되면서, 수주잔고가 매출로 인식되기 시작해 2024년부터 폭발적인 실적 성장을 기록 중입니다. 이러한 추세는 2026년까지 이어질 전망입니다.</p>
+            <div class="chart-container" style="height: 400px; max-height: 500px;">
+                <canvas id="financialsBarLineChart"></canvas>
+            </div>
+        </section>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">투자 매력도 분석</h2>
+                 <p class="text-center text-gray-600 mb-6">압도적인 수주잔고는 향후 2~3년간의 안정적인 고성장을 담보합니다. 여기에 ESS 및 LFP 시장 진출은 새로운 성장 스토리를 더하며 기업가치 재평가를 이끌고 있습니다.</p>
+                 <div class="chart-container" style="height: 350px;">
+                    <canvas id="investmentRadarChart"></canvas>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">SWOT 분석 (신규 사업 반영)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="swot-quadrant bg-green-50 border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 text-lg">강점 (Strengths)</h3>
+                        <ul class="list-disc list-inside text-green-700 mt-2 text-sm">
+                            <li>4조원 이상의 압도적인 수주잔고</li>
+                            <li>글로벌 Top-tier 고객사 포트폴리오</li>
+                            <li>광폭/고속 장비 등 기술적 초격차</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-red-50 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-800 text-lg">약점 (Weaknesses)</h3>
+                        <ul class="list-disc list-inside text-red-700 mt-2 text-sm">
+                            <li>2차전지 전방 산업에 대한 높은 의존도</li>
+                            <li>대규모 수주에 따른 운전 자본 부담</li>
+                            <li>수익성 변동 가능성</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-blue-50 border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 text-lg">기회 (Opportunities)</h3>
+                        <ul class="list-disc list-inside text-blue-700 mt-2 text-sm">
+                            <li>북미 배터리 공장 증설 사이클의 최대 수혜</li>
+                            <li class="font-bold">ESS 및 LFP 시장 진출로 신성장 동력 확보</li>
+                            <li>전고체 배터리용 장비 개발 선점</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-yellow-50 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-800 text-lg">위협 (Threats)</h3>
+                        <ul class="list-disc list-inside text-yellow-700 mt-2 text-sm">
+                            <li>글로벌 전기차 수요 둔화 장기화</li>
+                            <li>중국 경쟁사의 저가 수주 공세</li>
+                            <li>고객사의 투자 계획 지연 또는 축소 리스크</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">성장 엔진: 북미 시장 중심의 수주잔고 급증</h2>
+             <p class="text-center text-gray-600 mb-6">미국 IRA 정책에 따라 LG에너지솔루션, SK온, 삼성SDI 등 국내 3사를 비롯한 글로벌 배터리 제조사들이 북미에 대규모 공장을 건설하면서 피엔티의 수주가 폭발적으로 증가하고 있습니다.</p>
+            <div class="chart-container" style="height: 400px; max-height: 500px;">
+                <canvas id="orderBacklogBarChart"></canvas>
+            </div>
+        </section>
+
+         <section class="card">
+             <h2 class="text-2xl font-bold text-center mb-6">미래 성장 로드맵</h2>
+            <div class="relative border-l-2 border-green-500 ml-4 md:ml-0">
+                 <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-orange-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-orange-600">2025년 하반기</p>
+                    <p class="text-gray-700">ESS용 LFP 양극/음극 전극공정 롤투롤 장비 개발 완료 및 양산 라인 공급 추진. 신규 시장 진출 본격화.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-green-600">2026년</p>
+                    <p class="text-gray-700">동박 및 분리막용 소재 장비 사업 본격화. 사업 포트폴리오 다각화 및 신규 성장 동력 확보.</p>
+                </div>
+                <div class="ml-8">
+                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-gray-700">2027년 이후</p>
+                    <p class="text-gray-700">전고체 배터리용 전극 공정 장비 상용화 및 공급 추진. 차세대 배터리 시장에서도 리더십 유지.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 text-sm text-gray-500">
+            <p>본 자료는 투자 참고용으로, 투자 판단에 대한 최종 책임은 투자자 본인에게 있습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const processLabels = (labels) => {
+            const MAX_LENGTH = 16;
+            return labels.map(label => {
+                if (label.length <= MAX_LENGTH) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const newLabels = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > MAX_LENGTH) {
+                        newLabels.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                newLabels.push(currentLine);
+                return newLabels;
+            });
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+        
+        const palette = {
+            blue: '#2563eb',
+            green: '#16a34a',
+            gray: '#4b5563',
+            red: '#dc2626',
+            orange: '#f97316'
+        };
+
+        const financialsBarLineCtx = document.getElementById('financialsBarLineChart').getContext('2d');
+        new Chart(financialsBarLineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024(E)', '2025(E)', '2026(F)'],
+                datasets: [
+                    {
+                        label: '매출액 (억원)',
+                        data: [8115, 11500, 15000, 18000],
+                        backgroundColor: palette.blue,
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: '영업이익 (억원)',
+                        data: [1433, 2000, 2700, 3400],
+                        backgroundColor: palette.red,
+                        type: 'line',
+                        yAxisID: 'y1',
+                        borderColor: palette.red,
+                        borderWidth: 2,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { mode: 'index', intersect: false, ...commonTooltipOptions.plugins.tooltip },
+                    legend: { position: 'top' }
+                },
+                scales: {
+                   x: { grid: { display: false } },
+                   y: {
+                        position: 'left',
+                        beginAtZero: true,
+                        title: { display: true, text: '매출액 (억원)'}
+                    },
+                    y1: {
+                        position: 'right',
+                        title: { display: true, text: '영업이익 (억원)'},
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+        
+        const investmentRadarCtx = document.getElementById('investmentRadarChart').getContext('2d');
+        new Chart(investmentRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: processLabels(['성장성 (수주)', '신사업(LFP/ESS)', '기술력', '시장 지배력']),
+                datasets: [{
+                    label: '피엔티',
+                    data: [95, 80, 90, 85], 
+                    backgroundColor: 'rgba(22, 163, 74, 0.2)',
+                    borderColor: palette.green,
+                    borderWidth: 2,
+                    pointBackgroundColor: palette.green
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        pointLabels: { font: { size: 10 } },
+                         ticks: {
+                            callback: value => value,
+                             backdropColor: 'rgba(0,0,0,0)'
+                        }
+                    }
+                }
+            }
+        });
+
+        const orderBacklogBarCtx = document.getElementById('orderBacklogBarChart').getContext('2d');
+        new Chart(orderBacklogBarCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023년 말', '2024년 말', '2025년 3분기'],
+                datasets: [{
+                    label: '수주잔고 (조원)',
+                    data: [2.8, 3.6, 4.2],
+                    backgroundColor: [
+                        'rgba(37, 99, 235, 0.5)',
+                        'rgba(37, 99, 235, 0.7)',
+                        'rgba(37, 99, 235, 1.0)',
+                    ],
+                    borderColor: palette.blue,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                         title: { display: true, text: '수주잔고 (조원)'}
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
