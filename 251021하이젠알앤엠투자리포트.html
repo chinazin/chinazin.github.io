@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하이젠알앤엠(Hygen R&M) 기업 분석 리포트 (2025년 전망)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .flow-step {
+            text-align: center;
+            padding: 1rem;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: #1e40af;
+        }
+        .swot-quadrant {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">하이젠알앤엠 기업 분석 리포트</h1>
+            <p class="text-lg text-gray-600">로봇의 핵심, 액추에이터 국산화 선도 기업 (2025년 전망)</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="card text-center border-t-4 border-blue-800">
+                <h3 class="text-lg font-semibold text-blue-700 mb-2">핵심 제품</h3>
+                <p class="kpi-value text-blue-800">로봇 액추에이터</p>
+                <p class="text-gray-500">감속기+서보모터+제어기 일체형</p>
+            </div>
+            <div class="card text-center border-t-4 border-cyan-500">
+                <h3 class="text-lg font-semibold text-cyan-600 mb-2">핵심 경쟁력</h3>
+                <p class="kpi-value text-cyan-500">기술 국산화</p>
+                <p class="text-gray-500">외산 의존도 탈피 선도</p>
+            </div>
+            <div class="card text-center border-t-4 border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">신규 성장 동력</h3>
+                <p class="kpi-value text-gray-600">사업영역 다각화</p>
+                <p class="text-gray-500">방산, 항공우주, 의료 분야 진출</p>
+            </div>
+        </section>
+
+        <section class="card">
+             <h2 class="text-2xl font-bold mb-6 text-center">하이젠알앤엠의 역할: 로봇의 '근육과 신경' 공급</h2>
+             <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">액추에이터는 로봇의 관절을 움직이는 핵심 부품으로, '근육과 신경'에 해당합니다. 하이젠알앤엠은 이 액추에이터를 자체 기술로 개발 및 생산하여 로봇 제조사와 다양한 산업 분야에 공급합니다.</p>
+             <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-2 text-center">
+                <div class="flow-step">
+                     <div class="text-4xl mb-2">🏭</div>
+                     <h4 class="font-bold">하이젠알앤엠</h4>
+                     <p class="text-sm text-blue-700">액추에이터/모터 생산</p>
+                </div>
+                <div class="flex justify-center"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step">
+                     <div class="text-4xl mb-2">🤖</div>
+                     <h4 class="font-bold">로봇 제조사</h4>
+                     <p class="text-sm text-gray-500">협동로봇, 물류로봇 등</p>
+                </div>
+                 <div class="flex justify-center"><span class="flow-arrow font-bold transform rotate-90 md:rotate-0">→</span></div>
+                 <div class="flow-step">
+                     <div class="text-4xl mb-2">🚀</div>
+                     <h4 class="font-bold">다양한 산업 분야</h4>
+                     <p class="text-sm text-gray-500">산업, 물류, 방산, 항공우주</p>
+                </div>
+             </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">연간 재무 실적 및 전망 (2025년)</h2>
+                <p class="text-center text-gray-600 mb-6">2024년 6월 코스닥 상장을 통해 확보한 공모 자금을 생산 설비(CAPA) 증설에 투자, 2025년부터 본격적인 매출 성장과 흑자 전환이 기대됩니다.</p>
+                <div class="chart-container" style="height: 400px; max-height: 500px;">
+                    <canvas id="financialsBarLineChart"></canvas>
+                </div>
+            </div>
+             <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">사업 부문별 매출 비중 (2025년 전망)</h2>
+                <p class="text-center text-gray-600 mb-6">전통적인 산업용 모터 사업을 기반으로, 고부가가치 로봇용 부품 사업의 매출 비중이 빠르게 확대되며 성장을 견인할 전망입니다.</p>
+                <div class="chart-container" style="height: 400px; max-height: 500px;">
+                    <canvas id="revenueBySegmentDonutChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">투자 매력도 분석</h2>
+                 <p class="text-center text-gray-600 mb-6">독보적인 기술 국산화 능력과 전방 산업의 구조적 성장이 가장 큰 투자 포인트입니다. 방산 등 신사업 분야의 성과가 가시화될수록 기업가치는 재평가될 것입니다.</p>
+                 <div class="chart-container" style="height: 350px;">
+                    <canvas id="investmentRadarChart"></canvas>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">SWOT 분석 (2025년 관점)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="swot-quadrant bg-green-50 border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 text-lg">강점 (Strengths)</h3>
+                        <ul class="list-disc list-inside text-green-700 mt-2 text-sm">
+                            <li>로봇 핵심 부품 설계 및 제조 기술 내재화</li>
+                            <li>60년 업력 기반의 모터 기술력</li>
+                            <li>IPO를 통한 성장 자금 확보</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-red-50 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-800 text-lg">약점 (Weaknesses)</h3>
+                        <ul class="list-disc list-inside text-red-700 mt-2 text-sm">
+                            <li>성장 초기 단계의 낮은 수익성</li>
+                            <li>글로벌 대기업 대비 낮은 브랜드 인지도</li>
+                            <li>높은 연구개발(R&D) 비용 부담</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-blue-50 border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 text-lg">기회 (Opportunities)</h3>
+                        <ul class="list-disc list-inside text-blue-700 mt-2 text-sm">
+                            <li>글로벌 로봇 시장의 구조적 성장</li>
+                            <li class="font-bold">방산, 항공우주 등 신시장 개화</li>
+                            <li>정부의 로봇 산업 육성 정책</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-yellow-50 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-800 text-lg">위협 (Threats)</h3>
+                        <ul class="list-disc list-inside text-yellow-700 mt-2 text-sm">
+                            <li>글로벌 경기 침체에 따른 설비 투자 위축</li>
+                            <li>일본, 독일 등 글로벌 기업과의 경쟁 심화</li>
+                            <li>빠른 기술 변화에 대한 대응 필요</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+         <section class="card">
+             <h2 class="text-2xl font-bold text-center mb-6">미래 성장 로드맵 (상장사 관점)</h2>
+            <div class="relative border-l-2 border-cyan-500 ml-4 md:ml-0">
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-green-600">2024년</p>
+                    <p class="text-gray-700">코스닥 상장 성공 (6월). 성장 자금 확보 및 생산 설비 증설 착수.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-cyan-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-cyan-600">2025년</p>
+                    <p class="text-gray-700">IPO 공모자금 활용, 생산 CAPA 증설 완료. 북미, 유럽 등 해외 법인 설립 및 시장 개척 본격화. 흑자 전환 달성.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-blue-800 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-blue-700">2026년</p>
+                    <p class="text-gray-700">방산 및 항공우주 분야 액추에이터 양산 및 공급 시작. 신규 공장 가동으로 인한 매출 고성장.</p>
+                </div>
+                <div class="ml-8">
+                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-gray-700">2027년 이후</p>
+                    <p class="text-gray-700">글로벌 로봇 핵심 부품 Top-tier 기업으로 도약. 서비스 로봇, 의료 로봇 등 신규 시장 진출 확대.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 text-sm text-gray-500">
+            <p>본 자료는 투자 참고용으로, 투자 판단에 대한 최종 책임은 투자자 본인에게 있습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const processLabels = (labels) => {
+            const MAX_LENGTH = 16;
+            return labels.map(label => {
+                if (label.length <= MAX_LENGTH) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const newLabels = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > MAX_LENGTH) {
+                        newLabels.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                newLabels.push(currentLine);
+                return newLabels;
+            });
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+        
+        const palette = {
+            blue: '#3b82f6',
+            cyan: '#06b6d4',
+            darkBlue: '#1e40af',
+            red: '#ef4444',
+        };
+
+        const financialsBarLineCtx = document.getElementById('financialsBarLineChart').getContext('2d');
+        new Chart(financialsBarLineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024(E)', '2025(F)', '2026(F)'],
+                datasets: [
+                    {
+                        label: '매출액 (억원)',
+                        data: [780, 950, 1500, 2200],
+                        backgroundColor: palette.blue,
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: '영업이익 (억원)',
+                        data: [-25, 30, 120, 200],
+                        backgroundColor: palette.red,
+                        type: 'line',
+                        yAxisID: 'y1',
+                        borderColor: palette.red,
+                        borderWidth: 2,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { mode: 'index', intersect: false, ...commonTooltipOptions.plugins.tooltip },
+                    legend: { position: 'top' }
+                },
+                scales: {
+                   x: { grid: { display: false } },
+                   y: {
+                        position: 'left',
+                        beginAtZero: true,
+                        title: { display: true, text: '매출액 (억원)'}
+                    },
+                    y1: {
+                        position: 'right',
+                        title: { display: true, text: '영업이익 (억원)'},
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+        
+        const revenueBySegmentDonutCtx = document.getElementById('revenueBySegmentDonutChart').getContext('2d');
+        new Chart(revenueBySegmentDonutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['로봇용 부품', '산업용 모터', '기타'],
+                datasets: [{
+                    label: '사업 부문별 매출 비중',
+                    data: [60, 35, 5],
+                    backgroundColor: [palette.darkBlue, palette.cyan, '#9ca3af'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                }
+            }
+        });
+
+        const investmentRadarCtx = document.getElementById('investmentRadarChart').getContext('2d');
+        new Chart(investmentRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: processLabels(['기술력(국산화)', '성장성(시장확대)', '사업 다각화', '현재 수익성']),
+                datasets: [{
+                    label: '하이젠알앤엠',
+                    data: [95, 90, 85, 70], 
+                    backgroundColor: 'rgba(6, 182, 212, 0.2)',
+                    borderColor: palette.cyan,
+                    borderWidth: 2,
+                    pointBackgroundColor: palette.cyan
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                    tooltip: commonTooltipOptions.plugins.tooltip
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        pointLabels: { font: { size: 10 } },
+                         ticks: {
+                            callback: value => value,
+                             backdropColor: 'rgba(0,0,0,0)'
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
