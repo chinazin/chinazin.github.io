@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFP 배터리 심층 분석 리포트 (국내 기업 동향 포함)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .comparison-card {
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .tech-flow-box {
+            border: 2px solid #e5e7eb;
+        }
+        .tech-flow-arrow {
+            font-size: 2rem;
+            color: #3b82f6;
+            line-height: 1;
+            margin: 0.5rem 0;
+        }
+        table thead th {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">LFP 배터리, 시장의 판도를 바꾸다 (Ver 3.0)</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">'저가형'의 인식을 넘어 '합리적 대안'으로 부상한 LFP 배터리. 기술 혁신, 시장별 특성, 그리고 국내 기업들의 대응 전략까지 심층 분석합니다.</p>
+        </header>
+
+        <main>
+            <!-- 1. Why LFP? -->
+            <section id="why-lfp" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">근본적인 장점: 왜 LFP(리튬인산철)인가?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- LFP Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 comparison-card">
+                        <h3 class="text-2xl font-bold text-center text-blue-600 mb-4">LFP (리튬인산철)</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <p class="font-bold">✅ 압도적인 가격 경쟁력</p>
+                                <p class="text-sm text-gray-600">고가의 코발트, 니켈이 없어 원가가 NCM 대비 20~30% 저렴합니다.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <p class="font-bold">✅ 최고의 안정성과 긴 수명</p>
+                                <p class="text-sm text-gray-600">화재 위험이 현저히 낮고, 충방전 수명이 3,000회 이상으로 NCM(1,000~2,000회)보다 월등합니다.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <p class="font-bold">✅ 안정적인 원자재 공급망</p>
+                                <p class="text-sm text-gray-600">매장량이 풍부한 철을 사용하여 특정 국가 의존도가 낮고 공급망이 안정적입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- NCM Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 comparison-card">
+                        <h3 class="text-2xl font-bold text-center text-green-600 mb-4">NCM/NCA (삼원계)</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-green-50 rounded-lg">
+                                <p class="font-bold">✅ 높은 에너지 밀도</p>
+                                <p class="text-sm text-gray-600">에너지 밀도가 높아 긴 주행거리를 확보, 고성능/프리미엄 전기차에 필수적입니다.</p>
+                            </div>
+                             <div class="p-4 bg-red-50 rounded-lg">
+                                <p class="font-bold">❌ 높은 가격과 원자재 리스크</p>
+                                <p class="text-sm text-gray-600">핵심 원료인 코발트, 니켈의 가격 변동성이 크고 공급망이 불안정합니다.</p>
+                            </div>
+                            <div class="p-4 bg-red-50 rounded-lg">
+                                <p class="font-bold">❌ 상대적으로 낮은 안정성/수명</p>
+                                <p class="text-sm text-gray-600">LFP 대비 열 안정성이 낮고 충방전 수명이 짧습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2. Tech Advancement -->
+            <section id="tech" class="mb-16 bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-center mb-8">약점 극복: 주행거리는 정말 짧은가?</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">LFP의 '낮은 에너지 밀도'는 셀(Cell) 단위의 한계일 뿐, 팩(Pack) 단위에서는 혁신적인 패키징 기술로 극복되고 있습니다. 불필요한 부품을 제거하여 공간 효율을 높이는 방식으로, NCM과의 실질적인 주행거리 격차를 크게 줄였습니다.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 items-center justify-center gap-4 text-center">
+                    <div class="p-6 rounded-lg tech-flow-box">
+                        <h4 class="text-lg font-bold mb-2">기존 방식 (모듈 O)</h4>
+                        <p class="text-sm">셀 → 모듈 → 팩</p>
+                        <p class="text-sm text-gray-500 mt-2">모듈 케이스 등 부품들로 인해 공간 낭비 발생</p>
+                    </div>
+                    <div class="tech-flow-arrow text-center">➡️</div>
+                    <div class="p-6 rounded-lg tech-flow-box bg-blue-100 border-blue-300">
+                        <h4 class="text-lg font-bold mb-2">CTP (Cell to Pack) 기술</h4>
+                        <p class="text-sm">셀 → 팩 (모듈 제거)</p>
+                         <p class="text-sm text-gray-600 mt-2">에너지 밀도 10~15% 향상, 부품 수 40% 감소</p>
+                    </div>
+                </div>
+                 <p class="text-center text-gray-700 mt-8 font-semibold">결론: LFP 배터리를 탑재한 테슬라 모델3 (RWD)의 주행거리는 400km 이상으로, 일상 주행에 전혀 부족함이 없는 수준에 도달했습니다. LFP는 더 이상 '단거리용'이 아닙니다.</p>
+            </section>
+
+            <!-- 3. Market Impact -->
+            <section id="market-impact" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">시장별 전망: EV와 ESS, 다른 전략 같은 선택</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- ESS Market -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-center">ESS 시장: LFP의 절대 강자, 흔들림 없는 선택</h3>
+                        <p class="text-gray-600 mb-6">ESS는 전기차와 달리 공간 제약이 적어 에너지 밀도의 중요성이 낮습니다. 대신, 수십 년간 운영되어야 하므로 <span class="font-bold text-blue-600">①초기 설치 비용(가격), ②장기적 안정성(화재 방지), ③긴 수명(경제성)</span>이 핵심 경쟁력입니다. 이 모든 조건에서 LFP는 NCM을 압도하며, ESS 시장의 표준으로 자리 잡았습니다.</p>
+                        <div class="chart-container">
+                            <canvas id="essMarketChart"></canvas>
+                        </div>
+                    </div>
+                     <!-- EV Market -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-2xl font-bold mb-4 text-center">전기차(EV) 시장: '투트랙' 전략의 가속화</h3>
+                        <p class="text-gray-600 mb-6">기술 발전으로 LFP의 단점이 보완되면서, 완성차 업체들은 '보급형/스탠다드 모델에는 LFP', '프리미엄/롱레인지 모델에는 NCM'을 적용하는 투트랙 전략을 더욱 확대하고 있습니다. 이는 전기차 가격 인하를 통한 대중화의 핵심 열쇠입니다.</p>
+                        <div class="chart-container">
+                            <canvas id="evMarketChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Korean Companies (NEW SECTION) -->
+            <section id="korean-companies" class="mb-16 bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-center mb-8">LFP 전환에 나선 국내 주요 상장 기업</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">기존 삼원계(NCM) 배터리에 집중했던 국내 기업들도 LFP 시장의 성장성을 인지하고, 기술 개발 및 양산 계획을 발표하며 포트폴리오 다각화에 적극적으로 나서고 있습니다.</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">기업명</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">구분</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">주요 동향 및 전략</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">비고</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold">LG에너지솔루션</td>
+                                <td class="px-6 py-4 whitespace-nowrap">배터리 셀</td>
+                                <td class="px-6 py-4">ESS용 LFP는 양산 중. 2026년 EV용 LFP 배터리 양산 목표. 파우치형 LFP 개발.</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">보급형 EV 시장 공략</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold">삼성SDI</td>
+                                <td class="px-6 py-4 whitespace-nowrap">배터리 셀</td>
+                                <td class="px-6 py-4">2026년 양산 목표로 LFP 배터리 개발 중. 각형 배터리 기술력 활용.</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">코발트-프리 포트폴리오</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold">SK온</td>
+                                <td class="px-6 py-4 whitespace-nowrap">배터리 셀</td>
+                                <td class="px-6 py-4">2026년 양산 목표. 저온 성능 개선 LFP 기술(Winter Pro) 등 기술 차별화 시도.</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">기술 차별화 전략</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold">포스코퓨처엠</td>
+                                <td class="px-6 py-4 whitespace-nowrap">양극재</td>
+                                <td class="px-6 py-4">2025년 LFP 양극재 공장 착공 및 양산 계획. 원료부터 소재까지 수직계열화.</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">원료 내재화 강점</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold">에코프로비엠</td>
+                                <td class="px-6 py-4 whitespace-nowrap">양극재</td>
+                                <td class="px-6 py-4">2025년 LFP 양극재 양산 목표. 기존 하이니켈 기술력과 시너지 모색.</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">NCM 기술과 연계</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-bold">엘앤에프</td>
+                                <td class="px-6 py-4 whitespace-nowrap">양극재</td>
+                                <td class="px-6 py-4">LFP 양극재 개발 및 양산 추진. LS그룹과 협력하여 전구체 등 밸류체인 강화.</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">밸류체인 확장</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 5. Conclusion -->
+            <section id="conclusion" class="bg-blue-800 text-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-center mb-6">최종 결론 및 시사점</h2>
+                <div class="max-w-4xl mx-auto text-lg space-y-4">
+                    <p>LFP 배터리는 기술 혁신을 통해 주행거리 약점을 극복하며 <span class="font-bold">전기차 시장의 '캐즘(Chasm)'을 넘어 대중화 시대를 여는 주역</span>으로 부상했습니다. 동시에, 타협할 수 없는 가치인 '안전성'과 '경제성'을 바탕으로 <span class="font-bold">ESS 시장의 성장을 이끄는 독보적인 솔루션</span>으로 확고히 자리매김했습니다.</p>
+                    <p>따라서, 향후 2차전지 시장은 NCM과 LFP가 각자의 장점을 극대화하며 공존, 발전하는 구도가 될 것입니다. 국내 기업들 역시 LFP 포트폴리오 강화를 통해 다변화되는 시장 수요에 적극적으로 대응해야만 미래 경쟁에서 우위를 점할 수 있을 것입니다.</p>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-12 py-6 border-t border-gray-300">
+            <p class="text-gray-500">본 자료는 시장 분석을 바탕으로 작성되었으며, 투자 결정의 근거로 사용될 수 없습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const essMarketCtx = document.getElementById('essMarketChart').getContext('2d');
+            new Chart(essMarketCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['안전성', '긴 수명', '가격 경쟁력', '에너지 밀도 (중요도 낮음)'],
+                    datasets: [{
+                        label: 'LFP 배터리의 ESS 시장 적합도',
+                        data: [9.8, 9.5, 9.2, 6.0],
+                        backgroundColor: [
+                            '#2563eb',
+                            '#2563eb',
+                            '#2563eb',
+                            '#9ca3af'
+                        ],
+                        borderColor: '#1d4ed8',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'ESS 핵심 요구사항과 LFP의 부합도', font: { size: 16 } },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: '적합도 점수 (10점 만점)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            const evMarketCtx = document.getElementById('evMarketChart').getContext('2d');
+            new Chart(evMarketCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['LFP (보급형/스탠다드)', 'NCM/NCA (프리미엄/롱레인지)'],
+                    datasets: [{
+                        label: '시장 점유율 전망',
+                        data: [45, 55],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#16a34a'
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: { display: true, text: '2030년 글로벌 EV 배터리 시장 전망', font: { size: 16 } },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
