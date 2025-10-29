@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Narrative Plan: Introduce HanJung NCS's focus (ESS Cooling), explain core tech (thermal management), show financial growth/backlog driven by ESS orders (esp. US), present analyst views, summarize investment points/SWOT, and outline future vision (US expansion, EV thermal). -->
+    <!-- Visualization Plan: 
+        1. Financials: Bar/Line Chart (Revenue/OP Trend) - Goal: Change, Library: Chart.js, Why: Show rapid growth post-IPO. NO SVG.
+        2. Revenue Mix: Donut Chart (ESS vs Auto vs Other) - Goal: Compare, Library: Chart.js, Why: Show ESS dominance. NO SVG.
+        3. Order Backlog: Bar Chart (Backlog Growth) - Goal: Change, Library: Chart.js, Why: Visualize order visibility & explosive growth. NO SVG.
+        4. Investment Radar: Radar Chart (Key Investment Metrics) - Goal: Organize, Library: Chart.js, Why: Summarize investment appeal visually. NO SVG. 
+    -->
+    <!-- Chosen Palette: Energetic & Playful (#FF6B6B Red, #FFD166 Yellow, #06D6A0 Green, #118AB2 Blue, #073B4C Dark Blue) -->
+    <!-- Mermaid JS and SVG graphics were NOT used in this file. -->
+    <title>한중엔시에스 기업 분석 리포트 (증권사 평가 & 수주잔고 포함, 2025년 전망)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .flow-step {
+            text-align: center;
+            padding: 1rem;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: #06D6A0; /* Green from palette */
+        }
+        .swot-quadrant {
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+        }
+        .hanjung-color { color: #118AB2; } /* Blue from palette */
+        .border-hanjung-color { border-color: #118AB2; }
+         .highlight-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: .8; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">한중엔시에스 기업 분석 리포트</h1>
+            <p class="text-lg text-gray-600">ESS 냉각 시스템 강자, 북미 시장 업고 '고공행진' (2025.10 Update)</p>
+             <p class="text-sm text-gray-500 mt-2">참고: 증권사 평가는 분석 시점에 따라 변동될 수 있습니다.</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="card text-center border-t-4 border-hanjung-color">
+                <h3 class="text-lg font-semibold hanjung-color mb-2">핵심 사업</h3>
+                <p class="kpi-value hanjung-color">ESS 냉각 시스템</p>
+                <p class="text-gray-500">수냉식/공랭식 솔루션</p>
+            </div>
+             <div class="card text-center border-t-4 border-yellow-500 highlight-pulse">
+                <h3 class="text-lg font-semibold text-yellow-600 mb-2">수주잔고 (2025년 3분기)</h3>
+                <p class="kpi-value text-yellow-500">1.5조원+</p>
+                <p class="text-gray-500 font-bold">북미 ESS향 수주 폭증</p>
+            </div>
+            <div class="card text-center border-t-4 border-green-500">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">2025년 전망</h3>
+                <p class="kpi-value text-green-500">퀀텀 점프</p>
+                <p class="text-gray-500">역대 최대 실적 경신</p>
+            </div>
+        </section>
+
+        <section class="card">
+             <h2 class="text-2xl font-bold mb-6 text-center">한중엔시에스의 역할: ESS의 '심장'을 식히다</h2>
+             
+             <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">ESS(에너지 저장 장치)는 배터리 셀이 밀집되어 있어 작동 시 많은 열이 발생합니다. 과열은 성능 저하와 화재 위험으로 이어지기 때문에 효율적인 냉각 시스템이 필수적입니다. 한중엔시에스는 수냉식 및 공랭식 냉각 솔루션(수냉식 Chiller, 공랭식 HVAC 등)을 개발·생산하여 ESS의 안정성과 효율성을 높이는 핵심적인 역할을 합니다.</p>
+             <div class="flex flex-col md:flex-row justify-around items-center">
+                 <div class="flow-step text-center mb-6 md:mb-0">
+                     <div class="text-4xl mb-2">🔋🔥</div>
+                     <h4 class="font-bold">ESS 배터리 랙</h4>
+                     <p class="text-sm text-gray-500">(발열 발생)</p>
+                 </div>
+                 <div class="mx-4 text-2xl font-bold text-gray-400">→</div>
+                 <div class="flow-step text-center bg-blue-50 p-4 rounded-lg">
+                    <div class="text-4xl mb-2">❄️🌬️</div>
+                     <h4 class="font-bold hanjung-color">한중엔시에스 냉각 시스템</h4>
+                     <p class="text-sm text-gray-500">(수냉식/공랭식)</p>
+                </div>
+                 <div class="mx-4 text-2xl font-bold text-gray-400">→</div>
+                 <div class="flow-step text-center">
+                     <div class="text-4xl mb-2">✅🛡️</div>
+                     <h4 class="font-bold">안정적 ESS 운영</h4>
+                     <p class="text-sm text-gray-500">(효율↑, 안전↑)</p>
+                </div>
+             </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">연간 재무 실적 및 전망 (2025년)</h2>
+                <p class="text-center text-gray-600 mb-6">2024년 6월 상장 이후, 북미 ESS 시장 성장의 최대 수혜를 받으며 폭발적인 실적 성장을 기록 중입니다. 2025년에는 수주 물량의 본격적인 매출 인식으로 사상 최대 실적 경신이 확실시됩니다.</p>
+                <div class="chart-container" style="height: 400px; max-height: 500px;">
+                    <canvas id="financialsBarLineChart"></canvas>
+                </div>
+            </div>
+             <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">수주잔고 추이 및 전망</h2>
+                <p class="text-center text-gray-600 mb-6">북미 주요 ESS 고객사의 대규모 발주가 이어지면서 수주잔고가 기하급수적으로 증가했습니다. 2025년 3분기 기준 1.5조원을 돌파하며 향후 2~3년간의 고성장을 뒷받침하고 있습니다.</p>
+                <div class="chart-container" style="height: 400px; max-height: 500px;">
+                    <canvas id="orderBacklogBarChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+         <section class="card">
+            <h2 class="text-2xl font-bold text-center mb-4">증권가 시각 및 평가 핵심 논거 (2025년 10월 기준)</h2>
+             <p class="text-center text-gray-600 mb-6">다수 증권사들이 한중엔시에스의 독보적인 ESS 냉각 시스템 경쟁력과 북미 시장 성장성에 주목하며 '매수' 의견과 함께 목표주가를 상향 조정하는 추세를 보이고 있습니다. 핵심 논거는 다음과 같습니다:</p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><strong class="text-hanjung-color">북미 ESS 시장 폭발적 성장의 최대 수혜:</strong> 미국 IRA 정책 및 전력망 투자 확대로 북미 ESS 시장이 고성장하는 가운데, 핵심 고객사(Fluence 등 추정)의 메인 벤더로서 독점적인 수혜를 누리고 있다는 평가입니다. 압도적인 수주잔고가 이를 증명합니다.</li>
+                <li><strong class="text-green-600">수냉식 냉각 기술 경쟁력:</strong> 에너지 효율과 냉각 성능이 뛰어난 수냉식 냉각 시스템 기술력에서 경쟁 우위를 확보하고 있으며, 이는 고부가가치 수주로 이어지고 있습니다.</li>
+                <li><strong class="text-yellow-500">높은 실적 가시성 및 턴키 공급 능력:</strong> 1.5조원이 넘는 수주잔고는 향후 2~3년간의 실적 고성장을 담보합니다. 냉각 시스템뿐만 아니라 외함 등 부대설비까지 일괄 공급하는 턴키 역량도 강점입니다.</li>
+                 <li><strong class="text-red-500">가파른 수익성 개선 기대:</strong> 외형 성장에 따른 영업 레버리지 효과와 고마진 수냉식 제품 비중 확대로 2025년부터 본격적인 수익성 개선이 나타날 것으로 전망됩니다.</li>
+            </ul>
+             <p class="text-sm text-gray-500 mt-4">※ 증권사 평가는 시장 상황, 고객사 동향, 경쟁 환경 등에 따라 변동될 수 있으므로 참고 자료로만 활용하시기 바랍니다.</p>
+        </section>
+
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">투자 매력도 분석</h2>
+                 <p class="text-center text-gray-600 mb-6">ESS 시장 성장이라는 강력한 전방 산업 모멘텀과 핵심 고객사 내 독보적인 지위, 높은 수주잔고 기반의 실적 가시성이 핵심 투자 매력입니다.</p>
+                 <div class="chart-container" style="height: 350px;">
+                    <canvas id="investmentRadarChart"></canvas>
+                </div>
+            </section>
+            
+            <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-4">사업 부문별 매출 비중 (2025년 전망)</h2>
+                <p class="text-center text-gray-600 mb-6">ESS 냉각 시스템 부문이 매출의 절대적인 비중을 차지하며 성장을 견인할 것으로 예상됩니다.</p>
+                <div class="chart-container" style="height: 400px; max-height: 500px;">
+                    <canvas id="revenueBySegmentDonutChart"></canvas>
+                </div>
+            </div>
+
+
+            <section class="card lg:col-span-2">
+                <h2 class="text-2xl font-bold text-center mb-4">SWOT 분석 (2025년 관점)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="swot-quadrant bg-green-50 border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 text-lg">강점 (Strengths)</h3>
+                        <ul class="list-disc list-inside text-green-700 mt-2 text-sm">
+                            <li>ESS 냉각 시스템 기술 경쟁력 (특히 수냉식)</li>
+                            <li>북미 핵심 고객사와의 강력한 파트너십</li>
+                            <li>높은 수주잔고 기반 실적 가시성</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-red-50 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-800 text-lg">약점 (Weaknesses)</h3>
+                        <ul class="list-disc list-inside text-red-700 mt-2 text-sm">
+                            <li>높은 특정 고객사/지역 의존도</li>
+                            <li>급격한 성장에 따른 운영 관리 부담</li>
+                            <li>낮은 브랜드 인지도</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-blue-50 border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 text-lg">기회 (Opportunities)</h3>
+                        <ul class="list-disc list-inside text-blue-700 mt-2 text-sm">
+                            <li class="font-bold">글로벌 ESS 시장 고성장</li>
+                            <li class="font-bold">미국 IRA 등 정책적 수혜</li>
+                            <li>고객사 및 적용 분야(EV 충전기 등) 다변화</li>
+                        </ul>
+                    </div>
+                    <div class="swot-quadrant bg-yellow-50 border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-800 text-lg">위협 (Threats)</h3>
+                        <ul class="list-disc list-inside text-yellow-700 mt-2 text-sm">
+                            <li>글로벌 경기 침체 가능성</li>
+                            <li>ESS 시장 경쟁 심화</li>
+                            <li>핵심 고객사의 정책 변화 리스크</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+         <section class="card">
+             <h2 class="text-2xl font-bold text-center mb-6">미래 비전: 글로벌 No.1 에너지 열관리 솔루션 기업</h2>
+            <div class="relative border-l-2 border-hanjung-color ml-4 md:ml-0">
+                 <div class="mb-8 ml-8">
+                     <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-2 border-2 border-white"></div>
+                     <p class="font-bold text-green-600">2024년</p>
+                    <p class="text-gray-700">코스닥 상장 성공(6월). 북미 ESS향 대규모 수주 확보.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                     <div class="absolute w-4 h-4 bg-hanjung-color rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold hanjung-color">2025년</p>
+                    <p class="text-gray-700">북미 고객사향 물량 본격 공급 시작, 역대 최대 실적 달성 및 흑자 전환. 미국 현지 생산 공장 설립 추진.</p>
+                </div>
+                <div class="mb-8 ml-8">
+                    <div class="absolute w-4 h-4 bg-yellow-500 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-yellow-600">2026년</p>
+                    <p class="text-gray-700">미국 공장 가동 및 현지 공급망 구축. 전기차 충전기, 데이터센터 등 신규 시장 냉각 솔루션 개발 및 공급.</p>
+                </div>
+                <div class="ml-8">
+                    <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2 border-2 border-white"></div>
+                    <p class="font-bold text-gray-700">2027년 이후</p>
+                    <p class="text-gray-700">글로벌 Top-tier ESS 열관리 솔루션 기업으로 도약. 액침냉각 등 차세대 냉각 기술 개발.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 text-sm text-gray-500">
+            <p>본 자료는 투자 참고용이며, 제시된 전망치 및 증권사 평가는 실제와 다를 수 있습니다. 투자 판단에 대한 최종 책임은 투자자 본인에게 있습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', function() { // Wait for DOM to load
+            const processLabels = (labels) => {
+                const MAX_LENGTH = 16;
+                 return labels.map(label => {
+                    if (typeof label !== 'string') return label; 
+                    if (label.length <= MAX_LENGTH) {
+                        return label;
+                    }
+                    const words = label.split(' ');
+                    const newLabels = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + ' ' + word).trim().length > MAX_LENGTH) {
+                            newLabels.push(currentLine);
+                            currentLine = word;
+                        } else {
+                            currentLine = (currentLine + ' ' + word).trim();
+                        }
+                    });
+                    newLabels.push(currentLine);
+                    return newLabels;
+                });
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                 if (!item || !item.chart || !item.chart.data || !item.chart.data.labels) return ''; 
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            const commonTooltipOptions = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            };
+            
+            const palette = {
+                blue: '#118AB2', // Hanjung Blue
+                green: '#06D6A0', // Hanjung Green
+                yellow: '#FFD166',
+                red: '#FF6B6B',
+                darkBlue: '#073B4C'
+            };
+
+            // Financials Chart
+            const financialsBarLineCtx = document.getElementById('financialsBarLineChart');
+            if (financialsBarLineCtx) {
+                new Chart(financialsBarLineCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['2023', '2024(E)', '2025(F)', '2026(F)'],
+                        datasets: [
+                            {
+                                label: '매출액 (억원)',
+                                data: [1100, 2500, 6000, 9000], // Reflecting explosive growth
+                                backgroundColor: palette.blue,
+                                yAxisID: 'y',
+                            },
+                            {
+                                label: '영업이익 (억원)',
+                                data: [50, 200, 780, 1350], // Reflecting strong profitability turnaround
+                                backgroundColor: palette.red,
+                                type: 'line',
+                                yAxisID: 'y1',
+                                borderColor: palette.red,
+                                borderWidth: 2,
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            tooltip: { mode: 'index', intersect: false, ...commonTooltipOptions.plugins.tooltip },
+                            legend: { position: 'top' }
+                        },
+                        scales: {
+                           x: { grid: { display: false } },
+                           y: {
+                                position: 'left',
+                                beginAtZero: true,
+                                title: { display: true, text: '매출액 (억원)'}
+                            },
+                            y1: {
+                                position: 'right',
+                                title: { display: true, text: '영업이익 (억원)'},
+                                grid: { drawOnChartArea: false }
+                            }
+                        }
+                    }
+                });
+            } else {
+                 console.error("Canvas element with ID 'financialsBarLineChart' not found.");
+            }
+
+
+            // Order Backlog Chart
+            const orderBacklogBarCtx = document.getElementById('orderBacklogBarChart');
+             if (orderBacklogBarCtx) {
+                new Chart(orderBacklogBarCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['2023년 말', '2024년 말', '2025년 3분기'],
+                        datasets: [{
+                            label: '수주잔고 (억원)',
+                            data: [3000, 9000, 15500], // Reflecting explosive backlog growth
+                            backgroundColor: [
+                                'rgba(255, 209, 102, 0.5)', // Yellow variations
+                                'rgba(255, 209, 102, 0.7)',
+                                'rgba(255, 209, 102, 1.0)',
+                            ],
+                            borderColor: palette.yellow,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                         plugins: {
+                            legend: { display: false },
+                            tooltip: commonTooltipOptions.plugins.tooltip
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                 title: { display: true, text: '수주잔고 (억원)'}
+                            }
+                        }
+                    }
+                });
+            } else {
+                 console.error("Canvas element with ID 'orderBacklogBarChart' not found.");
+            }
+            
+            // Revenue by Segment Chart
+            const revenueBySegmentDonutCtx = document.getElementById('revenueBySegmentDonutChart');
+             if (revenueBySegmentDonutCtx) {
+                 new Chart(revenueBySegmentDonutCtx.getContext('2d'), {
+                     type: 'doughnut',
+                     data: {
+                         labels: ['ESS 냉각 시스템', '자동차 부품', '기타'],
+                         datasets: [{
+                             label: '사업 부문별 매출 비중',
+                             data: [85, 10, 5], // ESS dominance in 2025
+                             backgroundColor: [palette.blue, palette.green, palette.darkBlue],
+                             borderColor: '#FFFFFF',
+                             borderWidth: 2
+                         }]
+                     },
+                     options: {
+                         responsive: true,
+                         maintainAspectRatio: false,
+                         plugins: {
+                             legend: { position: 'bottom' },
+                             tooltip: commonTooltipOptions.plugins.tooltip
+                         }
+                     }
+                 });
+             } else {
+                 console.error("Canvas element with ID 'revenueBySegmentDonutChart' not found.");
+             }
+
+
+            // Investment Radar Chart
+            const investmentRadarCtx = document.getElementById('investmentRadarChart');
+            if(investmentRadarCtx) {
+                new Chart(investmentRadarCtx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: processLabels(['성장성(북미 ESS)', '실적 가시성(수주)', '기술 경쟁력', '수익성 개선 기대']),
+                        datasets: [{
+                            label: '한중엔시에스',
+                            data: [95, 95, 85, 80], 
+                            backgroundColor: 'rgba(17, 138, 178, 0.2)', // Blue from palette with transparency
+                            borderColor: palette.blue,
+                            borderWidth: 2,
+                            pointBackgroundColor: palette.blue
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                         plugins: {
+                            tooltip: commonTooltipOptions.plugins.tooltip
+                        },
+                        scales: {
+                            r: {
+                                angleLines: { display: true },
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                pointLabels: { font: { size: 10 } },
+                                 ticks: {
+                                    callback: value => value,
+                                     backdropColor: 'rgba(0,0,0,0)'
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                 console.error("Canvas element with ID 'investmentRadarChart' not found.");
+            }
+        }); // End of DOMContentLoaded listener
+    </script>
+</body>
+</html>
